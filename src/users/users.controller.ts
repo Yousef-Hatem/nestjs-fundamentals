@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
@@ -7,9 +7,9 @@ export class UsersController {
     return ['Ahmed', 'khalid', 'fatma'];
   }
 
-  @Get()
-  findOne(): string {
-    return 'Find one user';
+  @Get(':username')
+  findOne(@Param('username') username: string): string {
+    return username;
   }
 
   @Post()
@@ -17,13 +17,13 @@ export class UsersController {
     return 'Create a new user';
   }
 
-  @Patch()
-  update(): string {
-    return 'Update a user';
+  @Patch(':username')
+  update(@Param('username') username: string): string {
+    return username;
   }
 
-  @Delete()
-  remove(): string {
-    return 'Remove a user';
+  @Delete(':username')
+  remove(@Param('username') username: string): string {
+    return username;
   }
 }
