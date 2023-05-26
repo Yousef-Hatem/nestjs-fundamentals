@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -16,8 +18,8 @@ export class UsersController {
   }
 
   @Get(':username')
-  findOne(@Param('username') username: string): string {
-    return username;
+  findOne(@Param('username') username: string) {
+    return { username, email: 'ahmed@gmail.com' };
   }
 
   @Post()
@@ -26,12 +28,13 @@ export class UsersController {
   }
 
   @Patch(':username')
-  update(@Param('username') username: string): string {
-    return username;
+  update(@Param('username') username: string, @Body() input): string {
+    return input;
   }
 
   @Delete(':username')
-  remove(@Param('username') username: string): string {
-    return username;
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('username') username: string) {
+    console.log('removed user');
   }
 }
